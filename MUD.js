@@ -1,7 +1,7 @@
 /// Battle Palace MUD
 
 // RoomMC 
-class Room {
+export class Room {
 	constructor(name = '', desc = '', adjRms = {}, wepInRoom = []) {
 		this.name = name
 		this.desc = desc
@@ -12,7 +12,7 @@ class Room {
 
 // WeaponsMC 
 // 0 > maxDamage > 100
-class Weapon {
+export class Weapon {
 	constructor(name = '', desc = '', type, maxDamage = 0) {
 		this.name = name
 		this.desc = desc
@@ -23,7 +23,7 @@ class Weapon {
 
 // ['Sword', 'Axe', 'Gun', 'Bat', 'Throwing Star', 'Hammer', 'Flame Thrower', 'Candlestick', 'Dagger', 'Machete', 'ChainSaw']
 
-const Sword = new Weapon;
+export const Sword = new Weapon;
 Sword.name = 'Sword';
 Sword.desc = 'Double edge sword';
 Sword.type = 'Fire';
@@ -31,7 +31,7 @@ Sword.maxDamage = 50;
 
 
 
-const Axe = new Weapon;
+export const Axe = new Weapon;
 Axe.name = 'Axe';
 Axe.desc = `1700's Battle Axe`;
 Axe.type = 'Metal';
@@ -44,7 +44,7 @@ Axe.maxDamage = 65;
 // 0 > atkSpeed > 100
 // 0 > strength > 100
 // 0 > skill > 100
-class Persona {
+export class Persona {
 	constructor(name = '', desc = '', health = 0, atkSpeed = 0, strength = 0, skill = 0) {
 		this.name = name
 		this.desc = desc
@@ -55,7 +55,7 @@ class Persona {
 	}
 }
 
-const Godzilla = new Persona;
+export const Godzilla = new Persona;
 Godzilla.name = `Godzilla`;
 Godzilla.desc = `
 				Godzilla is depicted as an enormous, destructive, prehistoric sea monster awakened and empowered 
@@ -68,14 +68,14 @@ Godzilla.skill = 50;
 
 
 
-class Hero extends Persona {
+export class Hero extends Persona {
 	constructor(name, desc, health, atkSpeed, strength, skill) {
 		super(name, desc, health, atkSpeed, strength, skill)
 	}
 }
 
 /// Portal "where the game begins"
-const Foyer = new Room;
+export const Foyer = new Room;
 
 Foyer.name = 'Foyer'
 
@@ -84,22 +84,18 @@ Foyer.desc = `
 	To the north is a dark room where you will face an unknown enemy in battle. 
 	It is the quickest route to victory but also the most difficult
 	`
-Foyer.adjRms = {
-	North: Conservatory,
-	East: SEHallway,
-	West: SWHallway,
-	South: ExitGame
-}
+// Foyer.adjRms = {
+// 	North: Conservatory,
+// 	East: SEHallway,
+// 	West: SWHallway,
+// 	South: ExitGame
+// }
 
-const wepArr = [Sword, Axe]; /// on creation weapon added to Array
-const roomArr = [Foyer];
-const personasArr = [Hero, Godzilla];
+export const wepArr = [Sword, Axe]; /// on creation weapon added to Array
+export const roomArr = [Foyer];
+export const personasArr = [Hero, Godzilla];
 
-export {
-	wepArr,
-	roomArr,
-	personasArr
-}
+
 
 
 

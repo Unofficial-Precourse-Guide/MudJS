@@ -2,12 +2,11 @@ import {
     wepArr,
     roomArr,
     personasArr,
-} from "./MUD"
+} from "./MUD.js"
 
 const setWpnToRdn = function (wepQty) { // Select random weapon by index of 0 - weapons.length
     return wepArr[Math.trunc(Math.random() * wepQty)];
 }
-
 
 
 const game = () => {
@@ -21,8 +20,6 @@ const game = () => {
                 currentRoom.wepInRoom.push(setWpnToRdn(wepArr.length));
                 console.log(`This room has this weapons: ${wepInRoom.toString()}`)
                 break;
-            case
-
         }
     }
 }
