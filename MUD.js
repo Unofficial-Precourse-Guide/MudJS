@@ -1,8 +1,5 @@
 /// Battle Palace MUD
 
-const wepArr = [] /// on creation weapon added to Array
-
-
 // RoomMC 
 class Room {
 	constructor(name = '', desc = '', adjRms = {}, wepInRoom = []) {
@@ -12,14 +9,6 @@ class Room {
 		this.wepInRoom = wepInRoom
 	}
 }
-
-Room.prototype.setWpnToRdn = function (wepQty) { // Select random weapon by index of 0 - weapons.length
-	return wepArr[Math.trunc(Math.random() * wepQty)];
-}
-
-// Room.wepInRoom = wepArr[
-// 	Math.floor(Math.random() * Math.floor(array.length - 1))
-// ]
 
 // WeaponsMC 
 // 0 > maxDamage > 100
@@ -39,6 +28,8 @@ Sword.name = 'Sword';
 Sword.desc = 'Double edge sword';
 Sword.type = 'Fire';
 Sword.maxDamage = 50;
+
+
 
 const Axe = new Weapon;
 Axe.name = 'Axe';
@@ -89,16 +80,29 @@ const Foyer = new Room;
 Foyer.name = 'Foyer'
 
 Foyer.desc = ` 
-	You enter the foyer through a large wooden door. 
+	You enter the Foyer through a large wooden door. 
 	To the north is a dark room where you will face an unknown enemy in battle. 
 	It is the quickest route to victory but also the most difficult
 	`
-// Foyer.adjRms = {
-// 	North: Conservatory,
-// 	East: SEHallway,
-// 	West: SWHallway,
-// 	South: ExitGame
-// }
+Foyer.adjRms = {
+	North: Conservatory,
+	East: SEHallway,
+	West: SWHallway,
+	South: ExitGame
+}
+
+const wepArr = [Sword, Axe]; /// on creation weapon added to Array
+const roomArr = [Foyer];
+const personasArr = [Hero, Godzilla];
+
+export {
+	wepArr,
+	roomArr,
+	personasArr
+}
+
+
+
 
 
 
