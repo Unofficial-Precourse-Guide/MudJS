@@ -13,11 +13,16 @@ class Room {
 	}
 }
 
+Room.prototype.setWpnToRdn = function (wepQty) { // Select random weapon by index of 0 - weapons.length
+	return wepArr[Math.trunc(Math.random() * wepQty)];
+}
+
 // Room.wepInRoom = wepArr[
 // 	Math.floor(Math.random() * Math.floor(array.length - 1))
 // ]
 
 // WeaponsMC 
+// 0 > maxDamage > 100
 class Weapon {
 	constructor(name = '', desc = '', type, maxDamage = 0) {
 		this.name = name
@@ -27,16 +32,29 @@ class Weapon {
 	}
 }
 
-Weapon.prototype.addToWepArr = function () {}
+// ['Sword', 'Axe', 'Gun', 'Bat', 'Throwing Star', 'Hammer', 'Flame Thrower', 'Candlestick', 'Dagger', 'Machete', 'ChainSaw']
+
+const Sword = new Weapon;
+Sword.name = 'Sword';
+Sword.desc = 'Double edge sword';
+Sword.type = 'Fire';
+Sword.maxDamage = 50;
+
+const Axe = new Weapon;
+Axe.name = 'Axe';
+Axe.desc = `1700's Battle Axe`;
+Axe.type = 'Metal';
+Axe.maxDamage = 65;
 
 
 
 // PersonaMC
-// 0 > health > 500
-// 0 > atkSpeed > 10
+// 0 > health > 100
+// 0 > atkSpeed > 100
 // 0 > strength > 100
+// 0 > skill > 100
 class Persona {
-	constructor(name = '', desc = '', health = 0, atkSpeed = 0, strength = 0, skill) {
+	constructor(name = '', desc = '', health = 0, atkSpeed = 0, strength = 0, skill = 0) {
 		this.name = name
 		this.desc = desc
 		this.health = health
@@ -48,10 +66,14 @@ class Persona {
 
 const Godzilla = new Persona;
 Godzilla.name = `Godzilla`;
-Godzilla.desc = `Godzilla is depicted as an enormous, destructive, prehistoric sea monster awakened and empowered by nuclear radiation`;
+Godzilla.desc = `
+				Godzilla is depicted as an enormous, destructive, prehistoric sea monster awakened and empowered 
+				by nuclear radiation
+				`;
 Godzilla.health = 240;
 Godzilla.atkSpeed = 3;
 Godzilla.strength = 55;
+Godzilla.skill = 50;
 
 
 
