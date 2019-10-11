@@ -36,6 +36,9 @@ class Room {
 const Foyer = new Room;
 Foyer.name = 'Foyer'
 Foyer.desc = `You enter the Foyer through a large wooden door. To the north is a dark room where you will face an unknown enemy in battle. It is the quickest route to victory but also the most difficult`;
+Foyer.adjRms = ['Ninja', 'SEHallway', 'Exit', 'SWHallway'];
+Foyer.wepInRoom = [];
+
 // Foyer.wepInRoom = wepArr
 // Foyer.adjRms = {
 // 	North: Conservatory,
@@ -43,6 +46,55 @@ Foyer.desc = `You enter the Foyer through a large wooden door. To the north is a
 // 	West: SWHallway,
 // 	South: ExitGame
 // }
+
+
+const NWHallway = new Room;
+NWHallway.name = `NWHallway`
+NWHallway.desc = `NWHallway`
+NWHallway.adjRms = [`Abraham`, `Koopa`]
+NWHallway.wepInRoom = [];
+
+console.table(NWHallway);
+
+const NEHallway = new Room;
+NEHallway.name = `NEHallway`
+NEHallway.desc = `NEHallway`
+NEHallway.adjRms = [`Koopa`, `DarthVader`]
+NEHallway.wepInRoom = [];
+
+const EHallway = new Room;
+EHallway.name = `EHallway`
+EHallway.desc = `EHallway`
+EHallway.adjRms = [`DarthVader`, `MsPacman`]
+EHallway.wepInRoom = [];
+
+const SEHallway = new Room;
+SEHallway.name = `SEHallway`
+SEHallway.desc = `SEHallway`
+SEHallway.adjRms = [`MsPacman`, `Foyer`]
+SEHallway.wepInRoom = [];
+
+const SWHallway = new Room;
+SWHallway.desc = `SWHallway`
+SWHallway.name = `SWHallway`
+SWHallway.adjRms = [`Foyer`, `Godzilla`]
+SWHallway.wepInRoom = [];
+
+const WHallway = new Room;
+WHallway.name = `WHallway`
+WHallway.desc = `WHallway`
+WHallway.adjRms = [`DarthVader`, `MsPacman`]
+WHallway.wepInRoom = [];
+
+const Ninja = new Room;
+Ninja.name = `Ninja`
+Ninja.desc = `Unknown enemy`
+Ninja.adjRms = [`Koopa`, `Foyer`]
+Ninja.wepInRoom = [];
+
+
+
+
 
 // Names of Rooms in Mansion
 /*
@@ -100,13 +152,14 @@ const wepArr = [Sword, Axe, Gun]; /// on creation weapon added to Array
 // 0 > strength > 100
 // 0 > skill > 100
 class Persona {
-	constructor(name = '', desc = '', health = 0, atkSpeed = 0, strength = 0, skill = 0) {
+	constructor(name = '', desc = '', health = 0, atkSpeed = 0, strength = 0, skill = 0, weapon = []) {
 		this.name = name
 		this.desc = desc
 		this.health = health
 		this.atkSpeed = atkSpeed
 		this.strength = strength
 		this.skill = skill
+		this.weapon = weapon;
 	}
 }
 
@@ -121,8 +174,8 @@ Godzilla.skill = 50;
 
 
 class Hero extends Persona {
-	constructor(name, desc, health, atkSpeed, strength, skill) {
-		super(name, desc, health, atkSpeed, strength, skill)
+	constructor(name, desc, health, atkSpeed, strength, skill, weapon) {
+		super(name, desc, health, atkSpeed, strength, skill, weapon)
 	}
 }
 
@@ -147,18 +200,27 @@ const roomArr = [Foyer];
 */
 
 
-const setWpnToRdn = function (wepQty) { // Select random weapon by index of 0 - weapons.length
-	return wepArr[Math.trunc(Math.random() * wepQty)];
-}
-
-
 
 const game = () => {
+
+	const setWpnToRdn = function (wepQty) { // Select random weapon by index of 0 - weapons.length
+		return wepArr[Math.trunc(Math.random() * wepQty)];
+	}
+
 	let currentRoom = Foyer;
-	let exit = false;
-	// let wepInRoom = [];
-	while (!exit) {
-		console.log(`
+	const inputWeapon = () => {
+		rl.question('select your weapon...  ', (answer) => {
+			if (!currentRoom.wepInRoom.includes(answer)) {
+				console.log(`this weapon does not exist, please select again`)
+			} else {
+				console.log(`you have selected ${answer}`);
+				Hero.weapon.push(answer);
+			}
+			rl.close();
+		});
+	}
+
+	console.log(`
 
 
 :'######::'########::::'###::::'########::'########:::::'######::::::'###::::'##::::'##:'########:
@@ -172,22 +234,53 @@ const game = () => {
 
 
 		`)
-		console.log(currentRoom.desc);
-		switch (currentRoom) {
-			case Foyer:
-				currentRoom.wepInRoom.push(setWpnToRdn(wepArr.length));
-				currentRoom.wepInRoom.push(setWpnToRdn(wepArr.length));
-				currentRoom.wepInRoom.push(setWpnToRdn(wepArr.length));
-				console.log(`This room has this weapons: ${currentRoom.wepInRoom[0].name.toString()}, ${currentRoom.wepInRoom[1].name.toString()}, ${currentRoom.wepInRoom[2].name.toString()}`)
-				console.table(currentRoom.wepInRoom);
-				rl.question('select your weapon...  ', (answer) => {
-					console.log(`you have selected ${answer}`);
-					rl.close();
-				})
-				exit = true;
-				break;
+	console.log(Foyer.desc);
+	let exit = false;
+	while (!exit) {
 
-		}
+		// console.log(currentRoom.desc);
+		rl.question(`
+Make a selection: 
+1. Go to another room
+2. Search this room and select a weapon
+3. Battle
+4. Exit game
+
+		`, (answer) => {
+
+			switch (answer) {
+				case '1':
+					console.log(`We are moving`);
+					break;
+				case '2':
+					console.log(`selecting weapon`);
+					break;
+				case '3':
+					console.log(`Battle`);
+					break;
+				case '4':
+					console.log('You have exit the game')
+					exit = true;
+					break;
+				default:
+					console.log(`wrong selection, please select again...`);
+
+			}
+			rl.close();
+		});
+		// switch (currentRoom) {
+		// 	case Foyer:
+		// 		currentRoom.wepInRoom.push(setWpnToRdn(wepArr.length));
+		// 		currentRoom.wepInRoom.push(setWpnToRdn(wepArr.length));
+		// 		currentRoom.wepInRoom.push(setWpnToRdn(wepArr.length));
+		// 		console.log(`This room has this weapons: ${currentRoom.wepInRoom[0].name.toString()}, ${currentRoom.wepInRoom[1].name.toString()}, ${currentRoom.wepInRoom[2].name.toString()}`)
+		// 		console.table(currentRoom.wepInRoom);
+
+		// 		inputWeapon();
+		// 		break;
+
+		// }
+		// exit = true;
 	}
 }
 
