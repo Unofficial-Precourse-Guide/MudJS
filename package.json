@@ -1,0 +1,23 @@
+{
+  "name": "MudJS",
+  "version": "1.0.0",
+  "description": "Basic Multi-User Dungeon built in Javascript",
+  "main": "mud.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Unofficial-Precourse-Guide/MudJS.git"
+  },
+  "keywords": [],
+  "author": "Sebastian Garces",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Unofficial-Precourse-Guide/MudJS/issues"
+  },
+  "homepage": "https://github.com/Unofficial-Precourse-Guide/MudJS#readme",
+  "devDependencies": {
+    "readline": "^1.3.0"
+  }
+}
